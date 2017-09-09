@@ -136,6 +136,7 @@ export default class Home extends Component {
         <View style={homeStyles.container} tabLabel='About'>
           <Brand
             key={3}
+            title={"home"}
           />
           <ScrollView showsVerticalScrollIndicator={false}>
             <MainImg uri={`${Config.cdnHost}/brand/about.jpg`} />

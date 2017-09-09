@@ -36,11 +36,21 @@ export default class Tweets extends Component {
   findTweets = async prevRoom => {
     let tweetsAboutREI;
     if(prevRoom === 'REI'){
-      tweetsAboutREI = encodeURI('@rei sale')
+      tweetsAboutREI = '@rei sale'
     } else {
-      tweetsAboutREI = encodeURI(this.props.feedTxt[0])
+      tweetsAboutREI = this.props.feedTxt[0]
     }
-    const response = await fetch(`${Config.apiHost}/tweets/${tweetsAboutREI}`)
+
+
+    console.log(JSON.stringify({tweets: tweetsAboutREI, category: this.props.category, room: this.props.room}))
+    const response = await fetch(`${Config.apiHost}/tweets`, {
+      method: "POST",
+      body: JSON.stringify({tweets: tweetsAboutREI, category: this.props.category, room: this.props.room}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
     const tweets = await response.json()
     this.setState({tweets, prevRoom})
   }
